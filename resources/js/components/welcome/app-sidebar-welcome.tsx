@@ -3,10 +3,24 @@ import { Link } from '@inertiajs/react';
 import { BookOpen, Bot, Frame, PieChart, Settings2, SquareTerminal } from 'lucide-react';
 import AppLogo from '../app-logo';
 import { NavMain } from './nav-main';
-import { NavResource } from './nav-resource';
 import { NavWelcomeUser } from './nav-welcome-user';
+import { ButtonPost } from './button-post';
 
 const data = {
+    navHome: [
+        {
+            title: 'Accueil',
+            url: '/',
+            icon: SquareTerminal,
+            isActive: true,
+        },
+        {
+            title: 'Populaires',
+            url: '/famous',
+            icon: SquareTerminal,
+            isActive: true,
+        },
+    ],
     navMain: [
         {
             title: 'Thématique',
@@ -32,20 +46,6 @@ const data = {
             title: 'Ressource',
             url: '#',
             icon: Bot,
-            items: [
-                {
-                    title: 'Genesis',
-                    url: '#',
-                },
-                {
-                    title: 'Explorer',
-                    url: '#',
-                },
-                {
-                    title: 'Quantum',
-                    url: '#',
-                },
-            ],
         },
         {
             title: 'Documentation',
@@ -74,24 +74,6 @@ const data = {
             title: 'Settings',
             url: '#',
             icon: Settings2,
-            items: [
-                {
-                    title: 'General',
-                    url: '#',
-                },
-                {
-                    title: 'Team',
-                    url: '#',
-                },
-                {
-                    title: 'Billing',
-                    url: '#',
-                },
-                {
-                    title: 'Limits',
-                    url: '#',
-                },
-            ],
         },
     ],
     navResource: [
@@ -143,11 +125,13 @@ export function AppSidebarWelcome() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={data.navMain} />
-                <NavResource items={data.navResource}/>
+                <NavMain items={data.navHome} title="accueil" />
+                <NavMain items={data.navMain} title="thématique" />
+                <NavMain items={data.navResource} title="resource" />
             </SidebarContent>
 
             <SidebarFooter>
+                <ButtonPost/>
                 <NavWelcomeUser />
             </SidebarFooter>
         </Sidebar>

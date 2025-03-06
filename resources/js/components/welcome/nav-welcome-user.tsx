@@ -7,6 +7,7 @@ import { type SharedData } from '@/types';
 import { User } from '@/types/models/user.model';
 import { usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
+import { PersonMenuContent } from './person-menu-content';
 
 export function NavWelcomeUser() {
     const { auth } = usePage<SharedData>().props;
@@ -54,7 +55,7 @@ export function NavWelcomeUser() {
                             align="end"
                             side={isMobile ? 'bottom' : state === 'collapsed' ? 'left' : 'bottom'}
                         >
-                            <UserMenuContent user={auth__.user} />
+                            <PersonMenuContent />
                         </DropdownMenuContent>
                     </DropdownMenu>
                 )}

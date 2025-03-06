@@ -16,6 +16,7 @@ import {
 
 export function NavMain({
     items,
+    title,
 }: {
     items: {
         title: string;
@@ -27,10 +28,11 @@ export function NavMain({
             url: string;
         }[];
     }[];
+    title: string;
 }) {
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>{title.toUpperCase()}</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
                     <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
