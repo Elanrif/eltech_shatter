@@ -5,7 +5,7 @@ To install [https://laravel.com/docs/12.x/installation] Laravel on Windows, foll
 1. Open PowerShell as an administrator.
 
 ```bash
-   # Run as administrator...
+   # Run as administrator....
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
 ```
 
