@@ -10,13 +10,13 @@ const data = {
     navHome: [
         {
             title: 'Accueil',
-            url: '/',
+            url: 'home',
             icon: SquareTerminal,
             isActive: true,
         },
         {
             title: 'Populaires',
-            url: '/famous',
+            url: 'home',
             icon: SquareTerminal,
             isActive: true,
         },
@@ -24,86 +24,86 @@ const data = {
     navMain: [
         {
             title: 'Thématique',
-            url: '#',
+            url: 'home',
             icon: SquareTerminal,
             isActive: true,
             items: [
                 {
                     title: 'History',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Starred',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Settings',
-                    url: '#',
+                    url: 'home',
                 },
             ],
         },
         {
             title: 'Ressource',
-            url: '#',
+            url: 'home',
             icon: Bot,
         },
         {
             title: 'Documentation',
-            url: '#',
+            url: 'home',
             icon: BookOpen,
             items: [
                 {
                     title: 'Introduction',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Get Started',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Tutorials',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Changelog',
-                    url: '#',
+                    url: 'home',
                 },
             ],
         },
         {
             title: 'Settings',
-            url: '#',
+            url: 'home',
             icon: Settings2,
         },
     ],
     navResource: [
         {
             title: 'Ressource',
-            url: '#',
+            url: 'home',
             icon: Bot,
             items: [
                 {
                     title: 'Genesis',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Explorer',
-                    url: '#',
+                    url: 'home',
                 },
                 {
                     title: 'Quantum',
-                    url: '#',
+                    url: 'home',
                 },
             ],
         },
         {
             title: 'Design Engineering',
-            url: '#',
+            url: 'home',
             icon: Frame,
         },
         {
             title: 'Sales & Marketing',
-            url: '#',
+            url: 'home',
             icon: PieChart,
         },
     ],

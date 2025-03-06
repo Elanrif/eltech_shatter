@@ -13,6 +13,7 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import { Link } from '@inertiajs/react';
 
 export function NavMain({
     items,
@@ -40,25 +41,27 @@ export function NavMain({
                             <CollapsibleTrigger asChild>
                                 <SidebarMenuButton tooltip={item.title}>
                                     {item.icon && <item.icon />}
-                                    <span>{item.title}</span>
+                                    <Link href={route(`${item.url}`)} className={`${!item.items && 'w-full'}`}>
+                                        <span>{item.title}</span>
+                                    </Link>
                                     {item.items && (
                                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                     )}
                                 </SidebarMenuButton>
                             </CollapsibleTrigger>
-                            <CollapsibleContent>
-                                <SidebarMenuSub>
-                                    {item.items?.map((subItem) => (
+                            {item.items?.map((subItem) => (
+                                <CollapsibleContent>
+                                    <SidebarMenuSub>
                                         <SidebarMenuSubItem key={subItem.title}>
                                             <SidebarMenuSubButton asChild>
-                                                <a href={subItem.url}>
+                                                <Link href={route(`${subItem.url}`)}>
                                                     <span>{subItem.title}</span>
-                                                </a>
+                                                </Link>
                                             </SidebarMenuSubButton>
                                         </SidebarMenuSubItem>
-                                    ))}
-                                </SidebarMenuSub>
-                            </CollapsibleContent>
+                                    </SidebarMenuSub>
+                                </CollapsibleContent>
+                            ))}
                         </SidebarMenuItem>
                     </Collapsible>
                 ))}

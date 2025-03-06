@@ -11,9 +11,9 @@ Route::get('/accueil', function () {
     return Inertia::render('accueil');
 })->name('accueil');
 
-Route::get('/add-post', function () {
+Route::get('/posts/create', function () {
     return Inertia::render('post/add-post');
-})->name('add_post');
+})->name('posts.create');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
