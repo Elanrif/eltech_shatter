@@ -1,84 +1,70 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Bot, Frame, PieChart, Settings2, SquareTerminal } from 'lucide-react';
+import { BookOpen, BookOpenIcon, Bot, Clapperboard, Fence, HelpCircle, HouseIcon, MessageCircleQuestionIcon } from 'lucide-react';
 import AppLogo from '../app-logo';
+import { ButtonPost } from './button-post';
 import { NavMain } from './nav-main';
 import { NavWelcomeUser } from './nav-welcome-user';
-import { ButtonPost } from './button-post';
 
 const data = {
     navHome: [
         {
             title: 'Accueil',
             url: 'home',
-            icon: SquareTerminal,
+            icon: HouseIcon,
             isActive: true,
         },
         {
             title: 'Populaires',
             url: 'home',
-            icon: SquareTerminal,
+            icon: BookOpen,
             isActive: true,
         },
     ],
     navMain: [
         {
-            title: 'Thématique',
+            title: 'Culture et Internet',
             url: 'home',
-            icon: SquareTerminal,
-            isActive: true,
+            icon: Fence,
             items: [
                 {
-                    title: 'History',
+                    title: 'Humour',
                     url: 'home',
                 },
                 {
-                    title: 'Starred',
+                    title: 'Memes',
                     url: 'home',
                 },
                 {
-                    title: 'Settings',
+                    title: 'Animaux de compagnie',
                     url: 'home',
                 },
             ],
         },
         {
-            title: 'Ressource',
+            title: 'Question et réponses',
             url: 'home',
-            icon: Bot,
-        },
-        {
-            title: 'Documentation',
-            url: 'home',
-            icon: BookOpen,
+            icon: MessageCircleQuestionIcon,
             items: [
                 {
-                    title: 'Introduction',
+                    title: 'Questions et réponses',
                     url: 'home',
                 },
                 {
-                    title: 'Get Started',
-                    url: 'home',
-                },
-                {
-                    title: 'Tutorials',
-                    url: 'home',
-                },
-                {
-                    title: 'Changelog',
+                    title: 'Histoires et confessions',
                     url: 'home',
                 },
             ],
         },
         {
-            title: 'Settings',
+            title: 'Films et séries',
             url: 'home',
-            icon: Settings2,
+            icon: Clapperboard,
         },
     ],
     navResource: [
         {
-            title: 'Ressource',
+            title: 'eltech shatter',
             url: 'home',
             icon: Bot,
             items: [
@@ -97,14 +83,14 @@ const data = {
             ],
         },
         {
-            title: 'Design Engineering',
+            title: 'Aide',
             url: 'home',
-            icon: Frame,
+            icon: HelpCircle,
         },
         {
-            title: 'Sales & Marketing',
+            title: 'Blog',
             url: 'home',
-            icon: PieChart,
+            icon: BookOpenIcon,
         },
     ],
 };
@@ -131,7 +117,7 @@ export function AppSidebarWelcome() {
             </SidebarContent>
 
             <SidebarFooter>
-                <ButtonPost/>
+                <ButtonPost />
                 <NavWelcomeUser />
             </SidebarFooter>
         </Sidebar>
