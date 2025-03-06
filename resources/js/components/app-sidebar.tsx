@@ -10,7 +10,7 @@ import { NavMain } from './nav-main';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        url: '/dashboard',
+        url: 'home',
         icon: LayoutGrid,
     },
 ];
@@ -18,12 +18,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        url: 'https://github.com/laravel/react-starter-kit',
+        url: 'home',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        url: 'https://laravel.com/docs/starter-kits',
+        url: 'home',
         icon: BookOpen,
     },
 ];
@@ -35,7 +35,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href={route('home')} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
