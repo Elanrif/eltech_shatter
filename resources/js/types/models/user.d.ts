@@ -7,13 +7,13 @@ export interface User {
     created_at: string;
     updated_at: string;
     posts: Post[] | null
+    likes: Likes[] | null
 }
 
 export interface Post {
     id: number;
-    title?: string;
-    question?: string;
-    imageUrl?: string;
+    title: string;
+    image?: string;
     content?: string;
     comments: Comment[] | null;
     user: User;

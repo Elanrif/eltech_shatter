@@ -35,3 +35,27 @@ The **Laravel React Starter Kit** provides a robust, modern starting point for b
 - [Shadcn](https://ui.shadcn.com/)
 - [Tailwindcss](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+
+# Create Migrations
+Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.com/docs/12.x/eloquent) that makes it enjoyable to interact with your database. When using Eloquent, each database table has a corresponding "Model" that is used to interact with that table.
+
+```bash
+    # Generate a model and a migration
+    php artisan make:model Flight --migration --controller --resource --requests
+    php artisan make:model Flight -mcrR
+
+    # Shortcut to generate a model, migration, factory, seeder, policy, controller, 
+    # and form requests...
+    php artisan make:model Flight --all
+    php artisan make:model Flight -a
+
+    # Generate a pivot model...
+    php artisan make:model Member --pivot
+    php artisan make:model Member -p
+```
+
+## Run migrations
+Laravel run migrations from this command below
+```bash
+    php artisan migrate
+```
