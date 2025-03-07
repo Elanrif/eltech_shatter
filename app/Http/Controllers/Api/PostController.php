@@ -27,6 +27,7 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'image' => 'nullable|string',
             'content' => 'nullable|string',
+            'user_id' => 'required',
             //'user_id' => 'required|exists:users,id', // Vérifier que l'utilisateur existe
         ]);
 
@@ -52,7 +53,7 @@ class PostController extends Controller
             'title' => 'sometimes|string|max:255',
             'image' => 'nullable|string',
             'content' => 'nullable|string',
-            'user_id' => 'sometimes|exists:users,id', // Vérifier que l'utilisateur existe
+            //'user_id' => 'sometimes|exists:users,id', // Vérifier que l'utilisateur existe
         ]);
 
         $post = Post::findOrFail($id);
