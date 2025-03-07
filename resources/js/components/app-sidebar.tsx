@@ -1,32 +1,74 @@
 import { NavFooter } from '@/components/nav-footer';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Bookmark, Bot, Fence, HelpCircle, LayoutGrid, Settings } from 'lucide-react';
 import AppLogo from './app-logo';
 import { NavMain } from './nav-main';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        url: 'home',
-        icon: LayoutGrid,
-    },
-];
-
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        url: 'home',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        url: 'home',
-        icon: BookOpen,
-    },
-];
+const data = {
+    navHome: [
+        {
+            title: 'Dashboard',
+            url: 'home',
+            icon: LayoutGrid,
+        },
+        {
+            title: 'Enregistré',
+            url: 'home',
+            icon: Bookmark,
+            isActive: true,
+        },
+    ],
+    navMain: [
+        {
+            title: 'Culture et Internet',
+            url: 'home',
+            icon: Fence,
+            items: [
+                {
+                    title: 'Memes',
+                    url: 'home',
+                },
+                {
+                    title: 'Animaux de compagnie',
+                    url: 'home',
+                },
+            ],
+        },
+    ],
+    navResource: [
+        {
+            title: 'eltech shatter',
+            url: 'home',
+            icon: Bot,
+            items: [
+                {
+                    title: 'Genesis',
+                    url: 'home',
+                },
+                {
+                    title: 'Explorer',
+                    url: 'home',
+                },
+                {
+                    title: 'Quantum',
+                    url: 'home',
+                },
+            ],
+        },
+        {
+            title: 'Aide',
+            url: 'home',
+            icon: HelpCircle,
+        },
+        {
+            title: 'Pramètre',
+            url: 'home',
+            icon: Settings,
+        },
+    ],
+};
 
 export function AppSidebar() {
     return (
@@ -44,7 +86,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={data.navMain} title="Principale" />
             </SidebarContent>
 
             <SidebarFooter>
