@@ -36,7 +36,7 @@ The **Laravel React Starter Kit** provides a robust, modern starting point for b
 - [Tailwindcss](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-# Create Migrations
+# Create Migrations and Controllers
 Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.com/docs/12.x/eloquent) that makes it enjoyable to interact with your database. When using Eloquent, each database table has a corresponding "Model" that is used to interact with that table.
 
 ```bash
@@ -58,4 +58,11 @@ Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.c
 Laravel run migrations from this command below
 ```bash
     php artisan migrate
+```
+
+## Create RESTfull API and Exclude Csrf token
+Sometimes you may wish to [exclude a set of URIs from CSRF protection](https://laravel.com/docs/12.x/csrf#csrf-excluding-uris). For example, if you are using Stripe to process payments...
+
+```bash
+    php artisan make:controller Api/PostController --api
 ```
