@@ -2,22 +2,32 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/react';
-import { Bookmark, Bot, Fence, HelpCircle, LayoutGrid, Settings } from 'lucide-react';
+import { Bot, Clapperboard, Fence, FolderArchive, HelpCircle, LayoutDashboard, MessageSquareText, Settings } from 'lucide-react';
 import AppLogo from './app-logo';
 import { NavMain } from './nav-main';
 
 const data = {
     navHome: [
         {
-            title: 'Dashboard',
-            url: 'home',
-            icon: LayoutGrid,
+            title: 'Accueil',
+            url: 'dashboard',
+            icon: LayoutDashboard,
+            isActive: true,
         },
         {
-            title: 'Enregistré',
+            title: 'Mes Postes',
             url: 'home',
-            icon: Bookmark,
-            isActive: true,
+            icon: MessageSquareText,
+            items: [
+                {
+                    title: 'Publication',
+                    url: 'home',
+                },
+                {
+                    title: 'commentaire',
+                    url: 'home',
+                },
+            ],
         },
     ],
     navMain: [
@@ -26,6 +36,10 @@ const data = {
             url: 'home',
             icon: Fence,
             items: [
+                {
+                    title: 'Humour',
+                    url: 'home',
+                },
                 {
                     title: 'Memes',
                     url: 'home',
@@ -36,6 +50,11 @@ const data = {
                 },
             ],
         },
+        {
+            title: 'Films et séries',
+            url: 'home',
+            icon: Clapperboard,
+        },
     ],
     navResource: [
         {
@@ -43,10 +62,6 @@ const data = {
             url: 'home',
             icon: Bot,
             items: [
-                {
-                    title: 'Genesis',
-                    url: 'home',
-                },
                 {
                     title: 'Explorer',
                     url: 'home',
@@ -70,6 +85,29 @@ const data = {
     ],
 };
 
+const footerNavItems = [
+    {
+        title: 'Documentation',
+        url: 'home',
+        icon: FolderArchive,
+        items: [
+            {
+                title: 'Explorer',
+                url: 'home',
+            },
+            {
+                title: 'Quantum',
+                url: 'home',
+            },
+        ],
+    },
+    {
+        title: 'Paramètre',
+        url: 'profile.edit',
+        icon: Settings,
+    },
+];
+
 export function AppSidebar() {
     return (
         <Sidebar collapsible="icon" variant="inset">
@@ -86,11 +124,12 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
+                <NavMain items={data.navHome} title="dashboard" />
                 <NavMain items={data.navMain} title="Principale" />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
+                <NavFooter items={footerNavItems} title="Autres" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

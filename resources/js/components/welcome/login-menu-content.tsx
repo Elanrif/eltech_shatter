@@ -2,11 +2,11 @@ import { DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSep
 import { Link } from '@inertiajs/react';
 import { LogIn, User2Icon } from 'lucide-react';
 
-export function PersonMenuContent() {
+export function LoginMenuContent() {
     return (
         <>
             <DropdownMenuLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">Bienvenue</div>
+                <div className="flex text-slate-700 items-center gap-2 px-1 py-1.5 text-left text-sm">Partager vos publications</div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>

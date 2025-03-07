@@ -6,7 +6,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { type SharedData } from '@/types';
 import { usePage } from '@inertiajs/react';
 import { ChevronsUpDown } from 'lucide-react';
-import { PersonMenuContent } from './welcome/person-menu-content';
+import { Avatar, AvatarImage } from './ui/avatar';
+import { LoginMenuContent } from './welcome/login-menu-content';
 
 export function NavUser() {
     const { auth } = usePage<SharedData>().props;
@@ -14,12 +15,9 @@ export function NavUser() {
     const isMobile = useIsMobile();
     const auth__ = {
         user: {
-            id: 1,
             name: 'Jhon Doe',
-            email: 'jhon@gmail.com',
-            email_verified_at: '2023-10-01T00:00:00.000000Z',
-            created_at: '2023-10-01T00:00:00.000000Z',
-            updated_at: '2023-10-01T00:00:00.000000Z',
+            avatar: 'https://img.freepik.com/vecteurs-premium/icone-profil-utilisateur-dans-style-plat-illustration-vectorielle-avatar-membre-fond-isole-concept-entreprise-signe-autorisation-humaine_157943-15752.jpg?ga=GA1.1.973418412.1722070635',
+            alt: 'freepik icone profil',
         },
     };
     return (
@@ -45,7 +43,10 @@ export function NavUser() {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <SidebarMenuButton size="lg" className="text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent group">
-                                <UserInfo user={auth__.user} />
+                                <Avatar className="h-8 w-8 overflow-hidden rounded-full">
+                                    <AvatarImage src={auth__.user?.avatar} alt={auth__.user.alt} />
+                                </Avatar>
+                                <p>Publier des posts?</p>
                                 <ChevronsUpDown className="ml-auto size-4" />
                             </SidebarMenuButton>
                         </DropdownMenuTrigger>
@@ -54,7 +55,7 @@ export function NavUser() {
                             align="end"
                             side={isMobile ? 'bottom' : state === 'collapsed' ? 'left' : 'bottom'}
                         >
-                            <PersonMenuContent />
+                            <LoginMenuContent />
                         </DropdownMenuContent>
                     </DropdownMenu>
                 )}
