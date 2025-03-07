@@ -3,8 +3,8 @@ import { Link } from '@inertiajs/react';
 import { BookOpen, BookOpenIcon, Bot, Clapperboard, Fence, HelpCircle, HouseIcon, MessageCircleQuestionIcon } from 'lucide-react';
 import AppLogo from '../app-logo';
 import { ButtonPost } from './button-post';
-import { NavMain } from './nav-main';
-import { NavWelcomeUser } from './nav-welcome-user';
+import { NavMain } from '../nav-main';
+import { NavUser } from '../nav-user';
 
 const data = {
     navHome: [
@@ -118,7 +118,7 @@ export function AppSidebarWelcome() {
 
             <SidebarFooter>
                 <ButtonPost />
-                <NavWelcomeUser />
+                <NavUser />
             </SidebarFooter>
         </Sidebar>
     );

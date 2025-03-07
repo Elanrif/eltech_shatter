@@ -1,30 +1,110 @@
 import { NavFooter } from '@/components/nav-footer';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Bot, Clapperboard, Fence, FolderArchive, HelpCircle, LayoutDashboard, MessageSquareText, Settings } from 'lucide-react';
 import AppLogo from './app-logo';
 import { NavMain } from './nav-main';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        url: 'home',
-        icon: LayoutGrid,
-    },
-];
+const data = {
+    navHome: [
+        {
+            title: 'Accueil',
+            url: 'dashboard',
+            icon: LayoutDashboard,
+            isActive: true,
+        },
+        {
+            title: 'Mes Postes',
+            url: 'home',
+            icon: MessageSquareText,
+            items: [
+                {
+                    title: 'Publication',
+                    url: 'home',
+                },
+                {
+                    title: 'commentaire',
+                    url: 'home',
+                },
+            ],
+        },
+    ],
+    navMain: [
+        {
+            title: 'Culture et Internet',
+            url: 'home',
+            icon: Fence,
+            items: [
+                {
+                    title: 'Humour',
+                    url: 'home',
+                },
+                {
+                    title: 'Memes',
+                    url: 'home',
+                },
+                {
+                    title: 'Animaux de compagnie',
+                    url: 'home',
+                },
+            ],
+        },
+        {
+            title: 'Films et séries',
+            url: 'home',
+            icon: Clapperboard,
+        },
+    ],
+    navResource: [
+        {
+            title: 'eltech shatter',
+            url: 'home',
+            icon: Bot,
+            items: [
+                {
+                    title: 'Explorer',
+                    url: 'home',
+                },
+                {
+                    title: 'Quantum',
+                    url: 'home',
+                },
+            ],
+        },
+        {
+            title: 'Aide',
+            url: 'home',
+            icon: HelpCircle,
+        },
+        {
+            title: 'Pramètre',
+            url: 'home',
+            icon: Settings,
+        },
+    ],
+};
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        url: 'home',
-        icon: Folder,
-    },
+const footerNavItems = [
     {
         title: 'Documentation',
         url: 'home',
-        icon: BookOpen,
+        icon: FolderArchive,
+        items: [
+            {
+                title: 'Explorer',
+                url: 'home',
+            },
+            {
+                title: 'Quantum',
+                url: 'home',
+            },
+        ],
+    },
+    {
+        title: 'Paramètre',
+        url: 'profile.edit',
+        icon: Settings,
     },
 ];
 
@@ -44,11 +124,12 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain items={data.navHome} title="dashboard" />
+                <NavMain items={data.navMain} title="Principale" />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
+                <NavFooter items={footerNavItems} title="Autres" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
