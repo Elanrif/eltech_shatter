@@ -43,8 +43,8 @@ export function CardPostQuestionForm() {
         e.preventDefault();
 
         const errors: Partial<Record<keyof typeof data, string>> = {};
-        if (!data.theme) errors.theme = 'Sélectionner un thème.';
-        if (!data.title) errors.title = 'Veuillez saisir une question.';
+        if (!data.theme) errors.theme = 'Sélectionner un thème';
+        if (!data.title) errors.title = 'Veuillez saisir une question';
 
         if (Object.keys(errors).length > 0) {
             (Object.entries(errors) as [keyof typeof data, string][]).forEach(([key, message]) => {
