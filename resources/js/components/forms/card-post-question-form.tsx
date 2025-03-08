@@ -41,7 +41,6 @@ export function CardPostQuestionForm() {
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log("auth: ", auth)
         return;
         const errors: Partial<Record<keyof typeof data, string>> = {};
         if (!data.theme) errors.theme = 'Sélectionner un thème';
