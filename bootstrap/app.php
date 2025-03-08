@@ -14,6 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+    $middleware->validateCsrfTokens(except: [
+        'api/*', // Exclure toutes les URLs commençant par "api/" (déjà géré par défaut)
+    ]);
+    })
+    ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: ['appearance']);
 
         $middleware->web(append: [
@@ -21,11 +26,6 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
-    })
-    ->withMiddleware(function (Middleware $middleware) {
-    $middleware->validateCsrfTokens(except: [
-        'api/*', // Exclure toutes les URLs commençant par "api/" (déjà géré par défaut)
-    ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
