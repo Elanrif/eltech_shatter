@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -35,10 +36,10 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->content = $request->content;
-        
+        $post->user_id = Auth::id();
         $post->save();
 
-        return Redirect::route('welcome')->with('success', 'Post créer avec succès');
+        return Redirect::route('post.question')->with('success', 'Post créer avec succès');
     }
 
     /**

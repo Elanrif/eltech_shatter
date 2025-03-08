@@ -11,13 +11,15 @@ Route::get('/accueil', function () {
     return Inertia::render('accueil');
 })->name('accueil');
 
-Route::get('/posts/image', function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/posts/image', function () {
     return Inertia::render('post/post-image');
 })->name('post.image');
 
 Route::get('/posts/question', function () {
     return Inertia::render('post/post-question');
 })->name('post.question');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

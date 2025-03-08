@@ -41,19 +41,19 @@ export function CardPostQuestionForm() {
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        return;
         const errors: Partial<Record<keyof typeof data, string>> = {};
         if (!data.theme) errors.theme = 'Sélectionner un thème';
         if (!data.title) errors.title = 'Veuillez saisir une question';
 
-        if (Object.keys(errors).length > 0) {
+        /* if (Object.keys(errors).length > 0) {
             (Object.entries(errors) as [keyof typeof data, string][]).forEach(([key, message]) => {
                 setError(key, message);
             });
             return;
-        }
-        post(route('posts.store'));
-        console.log('data: ', data);
+        } */
+        post(route('posts.store'), {
+            onFinish: () => reset(),
+        });
     }
     return (
         <form onSubmit={submit}>
