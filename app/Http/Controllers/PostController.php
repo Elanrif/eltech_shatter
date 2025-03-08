@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -13,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('user')->get();
+        return Inertia::render('welcome',['posts',$posts]);
     }
 
     /**
@@ -21,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('post-image');
     }
 
     /**
@@ -29,7 +32,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        
+        $post->save();
+
+        return Redirect::route('welcome')->with('success', 'Post créer avec succès');
     }
 
     /**
@@ -37,7 +46,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return Inertia::render('post/show',['post' => $post]);
     }
 
     /**
@@ -45,7 +54,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+       return Inertia::render('Posts/Edit', ['post' => $post]);
     }
 
     /**
@@ -53,7 +62,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+
+        return Redirect::route('posts.index')->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -61,6 +74,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return Redirect::route('posts.index')->with('success', 'Post deleted successfully.');
     }
 }

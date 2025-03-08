@@ -44,6 +44,10 @@ Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.c
     php artisan make:model Flight --migration --controller --resource --requests
     php artisan make:model Flight -mcrR
 
+    # Generate a Request 
+    php artisan make:request Store[Flight]Request
+    php artisan make:request Update[Flight]Request
+
     # Shortcut to generate a model, migration, factory, seeder, policy, controller, 
     # and form requests...
     php artisan make:model Flight --all
@@ -65,4 +69,19 @@ Sometimes you may wish to [exclude a set of URIs from CSRF protection](https://l
 
 ```bash
     php artisan make:controller Api/PostController --api
+```
+
+## Clear cache
+Sometimes your need to clear laravel caches and run projects
+```bash
+    # Clear cache
+    php artisan cache:clear
+    php artisan config:clear
+    php artisan route:clear
+    php artisan view:clear
+    php artisan optimize:clear
+
+    # After that run the project
+    php artisan serve
+
 ```

@@ -1,4 +1,4 @@
-import { CardPostImageForm } from '@/components/card-post-image-form';
+import { CardPostImageForm } from '@/components/forms/card-post-image-form';
 import AppWelcomeLayout from '@/layouts/app-welcome-layout';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';

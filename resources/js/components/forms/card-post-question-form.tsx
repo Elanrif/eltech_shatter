@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link, useForm } from '@inertiajs/react';
 import { MessageCircleQuestionIcon } from 'lucide-react';
-import { Textarea } from './ui/input-textarea';
+import { Textarea } from '../ui/input-textarea';
 
 type FormData = {
     theme: string;
@@ -41,7 +41,8 @@ export function CardPostQuestionForm() {
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
+        console.log("auth: ", auth)
+        return;
         const errors: Partial<Record<keyof typeof data, string>> = {};
         if (!data.theme) errors.theme = 'Sélectionner un thème';
         if (!data.title) errors.title = 'Veuillez saisir une question';
@@ -52,8 +53,8 @@ export function CardPostQuestionForm() {
             });
             return;
         }
+        post(route('posts.store'));
         console.log('data: ', data);
-        //post('/login');
     }
     return (
         <form onSubmit={submit}>

@@ -13,13 +13,14 @@ export function NavUser() {
     const { auth } = usePage<SharedData>().props;
     const { state } = useSidebar();
     const isMobile = useIsMobile();
-    const auth__ = {
+    const visitor = {
         user: {
             name: 'Jhon Doe',
             avatar: 'https://img.freepik.com/vecteurs-premium/icone-profil-utilisateur-dans-style-plat-illustration-vectorielle-avatar-membre-fond-isole-concept-entreprise-signe-autorisation-humaine_157943-15752.jpg?ga=GA1.1.973418412.1722070635',
             alt: 'freepik icone profil',
         },
     };
+    console.log('AUTH: ', auth);
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -44,7 +45,7 @@ export function NavUser() {
                         <DropdownMenuTrigger asChild>
                             <SidebarMenuButton size="lg" className="text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent group">
                                 <Avatar className="h-8 w-8 overflow-hidden rounded-full">
-                                    <AvatarImage src={auth__.user?.avatar} alt={auth__.user.alt} />
+                                    <AvatarImage src={visitor.user?.avatar} alt={visitor.user.alt} />
                                 </Avatar>
                                 <p>Publier des posts?</p>
                                 <ChevronsUpDown className="ml-auto size-4" />

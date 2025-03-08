@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\StorePostRequest;
+use App\Http\Requests\API\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -20,18 +22,9 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        
-    $request->validate([
-            'title' => 'required|string|max:255',
-            'image' => 'nullable|string',
-            'content' => 'nullable|string',
-            'user_id' => 'required',
-            //'user_id' => 'required|exists:users,id', // Vérifier que l'utilisateur existe
-        ]);
-
-        $post = Post::create($request->all());
+        $post = Post::create($request->validated());
         return response()->json($post,201);
     }
 
@@ -47,17 +40,10 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePostRequest $request, string $id)
     {
-        $request->validate([
-            'title' => 'sometimes|string|max:255',
-            'image' => 'nullable|string',
-            'content' => 'nullable|string',
-            //'user_id' => 'sometimes|exists:users,id', // Vérifier que l'utilisateur existe
-        ]);
-
         $post = Post::findOrFail($id);
-        $post->update($request->all());
+        $post->update($request->validated());
         return response()->json($post);
     }
 
