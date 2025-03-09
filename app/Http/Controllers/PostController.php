@@ -47,7 +47,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
 
-        return Redirect::route('post.image')->with('success', 'Post créer avec succès');
+        return Redirect::route('home')->with('success', 'Post créer avec succès');
     }
 
         public function StoreQuestion(StorePostQuestionRequest $request)
@@ -62,7 +62,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
 
-        return Redirect::route('post.question')->with('success', 'Post créer avec succès');
+        return Redirect::route('home')->with('success', 'Post créer avec succès');
     }
 
     /**
