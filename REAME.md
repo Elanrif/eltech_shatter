@@ -98,3 +98,11 @@ Sometimes your need to clear laravel caches and run projects
     php artisan serve
 
 ```
+
+# The public disk
+The [public disk](https://laravel.com/docs/12.x/filesystem) included in your application's filesystems configuration file is intended for files that are going to be publicly accessible. 
+By stores its files in storage/app/public.
+```bash
+    # Storage link
+    php artisan storage:link
+```
