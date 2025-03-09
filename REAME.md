@@ -36,7 +36,7 @@ The **Laravel React Starter Kit** provides a robust, modern starting point for b
 - [Tailwindcss](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-# Create Migrations and Controllers
+# Create Migrations, Controllers, ... Request
 Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.com/docs/12.x/eloquent) that makes it enjoyable to interact with your database. When using Eloquent, each database table has a corresponding "Model" that is used to interact with that table.
 
 ```bash
@@ -58,6 +58,19 @@ Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.c
     php artisan make:model Member -p
 ```
 
+# Manage migrations rollback, reset ...
+If you have made changes to a column in an existing migration or something else and want to reapply all migrations to update your database structure, here are the steps to follow:
+
+```bash
+    #Sumarize uses command :
+    php artisan migrate:refresh
+    
+    php artisan migrate:rollback
+
+    php artisan migrate:reset
+
+
+```
 ## Run migrations
 Laravel run migrations from this command below
 ```bash

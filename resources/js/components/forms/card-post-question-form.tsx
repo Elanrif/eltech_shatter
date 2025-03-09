@@ -51,7 +51,7 @@ export function CardPostQuestionForm() {
             });
             return;
         } */
-        post(route('posts.store'), {
+        post(route('posts.storeQuestion'), {
             onFinish: () => reset(),
         });
     }

@@ -4,5 +4,6 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('')->group(function () {
-    Route::resource('posts', PostController::class);
+    Route::apiResource('posts', PostController::class);
+    Route::post('posts/storeQuestion', [PostController::class, 'storeQuestion'])->name('posts.storeQuestion');
 });

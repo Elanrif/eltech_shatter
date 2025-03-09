@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostQuestionRequest;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostQuestionRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -21,21 +25,40 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return Inertia::render('post-image');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StorePostRequest $request)
     {
+        // Get validated data
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = Str::random(20) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('public/images', $imageName);
+            $imageUrl = Storage::url($imagePath);
+        }
+
+
         $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
+        $post->theme = $validatedData['theme'];
+        $post->title = $validatedData['title'];
+        $post->image = $imageUrl;
+        $post->user_id = Auth::id();
+        $post->save();
+
+        return Redirect::route('post.image')->with('success', 'Post créer avec succès');
+    }
+
+        public function StoreQuestion(StorePostQuestionRequest $request)
+    {
+        // Get validated data
+        $validatedData = $request->validated();
+
+        $post = new Post();
+        $post->theme = $validatedData['theme'];
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
         $post->user_id = Auth::id();
         $post->save();
 

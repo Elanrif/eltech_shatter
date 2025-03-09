@@ -14,10 +14,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('theme');
             $table->string('title');
             $table->string('image')->nullable(); // image (optionnel)
             $table->text('content')->nullable(); // content (optionnel)
-            $table->foreignId(User::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

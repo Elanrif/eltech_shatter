@@ -80,9 +80,9 @@ export function CardPostImageForm() {
         }
         console.log('formData: ', formDataObject);
         
-        /* post('/upload-image', formData, {
-            forceFormData: true,
-        }); */
+        post(route('posts.store'), {
+            onFinish: () => reset(),
+        });
     }
 
     return (
