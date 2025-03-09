@@ -15,7 +15,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Welcome() {
     const {props} = usePage();
-    console.log('props: ', props.success)
+    console.log('props: ', props)
     const { success } = props;
 
     useEffect(() => {

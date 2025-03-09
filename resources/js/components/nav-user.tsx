@@ -20,7 +20,7 @@ export function NavUser() {
             alt: 'freepik icone profil',
         },
     };
-    console.log('AUTH: ', auth);
+    
     return (
         <SidebarMenu>
             <SidebarMenuItem>
