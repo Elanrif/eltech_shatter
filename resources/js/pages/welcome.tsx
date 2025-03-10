@@ -1,4 +1,5 @@
 import CardPostUser from '@/components/welcome/card-post-user';
+import { SkeletonPost } from '@/components/welcome/skeleton-post';
 import AppWelcomeLayout from '@/layouts/app-welcome-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Post } from '@/types/models/user';
@@ -44,13 +45,18 @@ export default function Welcome() {
         <>
             <AppWelcomeLayout breadcrumbs={breadcrumbs}>
                 <Head title="eltech shatter" />
-                <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+                {
+                    posts.length > 0 ? 
+                    <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                     {posts.map((post, index) => (
                         <React.Fragment key={index}>
                             <CardPostUser post={post} />
                         </React.Fragment>
                     ))}
                 </div>
+                :
+                <SkeletonPost/>
+                }
             </AppWelcomeLayout>
             <ToastContainer
                 position="bottom-right"
