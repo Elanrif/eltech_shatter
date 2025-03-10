@@ -21,7 +21,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Welcome() {
     const {props} = usePage<WelcomeProps>();
-    console.log('props: ', props)
     const { success,posts } = props;
 
     console.log('posts: ', posts);

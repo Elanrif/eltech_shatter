@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    $posts = Post::with('user')->get();
+    $posts = Post::with('user')->latest()->get();
     return Inertia::render('welcome',[
         'success' => session('success'),
         'posts' => $posts,
