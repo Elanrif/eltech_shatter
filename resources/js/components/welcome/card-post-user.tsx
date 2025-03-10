@@ -26,9 +26,6 @@ export default function CardPostUser({ post }: { post: Post }) {
                 </CardHeader>
                 <CardContent>
                     <CardDescription>
-                        <img src="{{asset('storage\app\private\public\images\6j59O7GdQAdkflMsegx3.jpg" />
-                        <img src="{{asset('elanrif.png')}}" alt="elanrif"/>
-                        <img src={"asset('elanrif.png')"} alt="elanrif photo"/>
                         {post.image ? <img src={`${post.image}`} alt={post.image} /> : post.content}
                     </CardDescription>
                 </CardContent>
