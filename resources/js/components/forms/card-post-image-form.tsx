@@ -97,7 +97,7 @@ export function CardPostImageForm() {
                         <CardDescription>Publier une image.</CardDescription>
                     </CardHeader>
                     <CardHeader className="mt-3 text-slate-500 duration-300 ease-in-out hover:text-black">
-                        <Link href={route('post.question')}>Postuer une question ?</Link>
+                        <Link href={route('posts.index_question')}>Postuer une question ?</Link>
                     </CardHeader>
                 </div>
                 <CardContent>

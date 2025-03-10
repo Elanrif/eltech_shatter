@@ -51,7 +51,7 @@ export function CardPostQuestionForm() {
             });
             return;
         } */
-        post(route('posts.storeQuestion'), {
+        post(route('posts.store_question'), {
             onFinish: () => reset(),
         });
     }
@@ -67,7 +67,7 @@ export function CardPostQuestionForm() {
                         <CardDescription>Publier une question.</CardDescription>
                     </CardHeader>
                     <CardHeader className="mt-3 text-slate-500 duration-300 ease-in-out hover:text-black">
-                        <Link href={route('post.image')}>Postuler une image ?</Link>
+                        <Link href={route('posts.index')}>Postuler une image ?</Link>
                     </CardHeader>
                 </div>
                 <CardContent>

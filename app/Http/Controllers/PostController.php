@@ -18,11 +18,19 @@ use Inertia\Inertia;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource image.
      */
     public function index()
     {
-        //
+         return Inertia::render('posts/image',[ 'error' => session('error'),]);
+    }
+
+        /**
+     * Display a listing of the resource question.
+     */
+    public function index_question()
+    {
+         return Inertia::render('posts/question',[ 'error' => session('error'),]);
     }
 
     /**
@@ -51,7 +59,7 @@ class PostController extends Controller
         return Redirect::route('home')->with('success', 'Post created successfully');
     }
 
-        public function StoreQuestion(StorePostQuestionRequest $request)
+        public function store_question(StorePostQuestionRequest $request)
     {
         try {
             // Get validated data

@@ -1,24 +1,24 @@
-import { CardPostImageForm } from '@/components/forms/card-post-image-form';
+import { CardPostQuestionForm } from '@/components/forms/card-post-question-form';
 import AppWelcomeLayout from '@/layouts/app-welcome-layout';
 import { BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 
-interface PostImageProps {
+interface PostQuestionProps {
     error: string | null;
     [key: string]: unknown; // Inertia exige une signature d'index pour les props
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Poster une image',
-        href: 'post.image',
+        title: 'Poster une question?',
+        href: 'posts.index_question',
     },
 ];
 
-export default function PostImage() {
-    const { props } = usePage<PostImageProps>();
+export default function PostQuestion() {
+    const { props } = usePage<PostQuestionProps>();
     const { error } = props;
 
     useEffect(() => {
@@ -36,11 +36,12 @@ export default function PostImage() {
             });
         }
     }, [error]);
+
     return (
         <AppWelcomeLayout breadcrumbs={breadcrumbs}>
             <div className="px-7 py-4">
-                <Head title="Poster image" />
-                <CardPostImageForm />
+                <Head title="Poster question" />
+                <CardPostQuestionForm />
             </div>
             <ToastContainer
                 position="bottom-right"

@@ -58,6 +58,18 @@ Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.c
     php artisan make:model Member -p
 ```
 
+## Display Laravel Routes
+[The command allows us](https://stillat.com/blog/2016/12/07/laravel-artisan-route-command-the-routelist-command) to display all routes in laravel is showed below.
+
+```bash
+    # Display all routes
+    php artisan route:list
+
+    # Filter by name
+    php artisan route:list --name=posts
+```
+
+
 # Manage migrations rollback, reset ...
 If you have made changes to a column in an existing migration or something else and want to reapply all migrations to update your database structure, here are the steps to follow:
 
