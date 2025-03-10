@@ -1,11 +1,16 @@
 import CardPostUser from '@/components/welcome/card-post-user';
 import AppWelcomeLayout from '@/layouts/app-welcome-layout';
-import { postData } from '@/lib/data/data.test';
 import { type BreadcrumbItem } from '@/types';
+import { Post } from '@/types/models/user';
 import { Head, usePage } from '@inertiajs/react';
 import React, { useEffect } from 'react';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 
+interface WelcomeProps {
+    success: string | null;
+    posts: Post[];
+    [key: string]: unknown; // Inertia exige une signature d'index pour les props
+}
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Etelch Shatter',
@@ -14,10 +19,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Welcome() {
-    const {props} = usePage();
+    const {props} = usePage<WelcomeProps>();
     console.log('props: ', props)
-    const { success } = props;
+    const { success,posts } = props;
 
+    console.log('posts: ', posts);
     useEffect(() => {
         if(success) {
             toast.success(`${success}`, {
@@ -39,7 +45,7 @@ export default function Welcome() {
             <AppWelcomeLayout breadcrumbs={breadcrumbs}>
                 <Head title="eltech shatter" />
                 <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                    {postData.map((post, index) => (
+                    {posts.map((post, index) => (
                         <React.Fragment key={index}>
                             <CardPostUser post={post} />
                         </React.Fragment>

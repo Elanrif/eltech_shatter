@@ -22,10 +22,15 @@ export default function CardPostUser({ post }: { post: Post }) {
                     </CardHeader>
                 </div>
                 <CardHeader>
-                    <CardTitle>{post.imageUrl ? post.title : post.question}</CardTitle>
+                    <CardTitle>{post.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <CardDescription>{post.imageUrl ? <img src={`${post.imageUrl}`}/> : post.content}</CardDescription>
+                    <CardDescription>
+                        <img src="{{asset('storage\app\private\public\images\6j59O7GdQAdkflMsegx3.jpg" />
+                        <img src="{{asset('elanrif.png')}}" alt="elanrif"/>
+                        <img src={"asset('elanrif.png')"} alt="elanrif photo"/>
+                        {post.image ? <img src={`${post.image}`} alt={post.image} /> : post.content}
+                    </CardDescription>
                 </CardContent>
                 <CardFooter className="flex flex-row items-center gap-10">
                     <div className="flex items-center justify-center space-x-2 hover:cursor-pointer">

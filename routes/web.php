@@ -1,11 +1,14 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
+    $posts = Post::with('user')->get();
     return Inertia::render('welcome',[
         'success' => session('success'),
+        'posts' => $posts,
     ]);
 })->name('home');
 
