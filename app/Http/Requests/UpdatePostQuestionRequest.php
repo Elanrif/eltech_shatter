@@ -24,7 +24,7 @@ class UpdatePostQuestionRequest extends FormRequest
         return [
             'theme' => 'required',
             'title' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
+            'content' => 'required|string',
         ];
     }
 }

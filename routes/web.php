@@ -18,12 +18,15 @@ Route::get('/accueil', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/posts/image', function () {
-    return Inertia::render('post/post-image');
+    return Inertia::render('post/post-image',[ 'success' => session('error'),]);
 })->name('post.image');
 
 Route::get('/posts/question', function () {
-    return Inertia::render('post/post-question');
+    return Inertia::render('post/post-question',[
+        'error' => session('error')
+    ]);
 })->name('post.question');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -87,7 +87,7 @@ export function CardPostImageForm() {
 
     return (
         <form onSubmit={submit}>
-            <Card className="w-[750px]">
+            <Card className="md:w-[750px]">
                 <div className="flex items-center justify-between">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2">

@@ -8,9 +8,11 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostQuestionRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class PostController extends Controller
@@ -47,12 +49,13 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
 
-        return Redirect::route('home')->with('success', 'Post créer avec succès');
+        return Redirect::route('home')->with('success', 'Post created successfully');
     }
 
         public function StoreQuestion(StorePostQuestionRequest $request)
     {
-        // Get validated data
+        try {
+            // Get validated data
         $validatedData = $request->validated();
 
         $post = new Post();
@@ -62,7 +65,18 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
 
-        return Redirect::route('home')->with('success', 'Post créer avec succès');
+        // Log success
+        Log::info('Post created successfully', ['post' => $post]);
+        
+        return Redirect::route('home')->with('success', 'Post created successfully');
+
+        } catch (\Exception $e) {
+            // Log error
+            Log::error('Failed to crate post', ['error' => $e->getMessage()()]);
+
+            // It doesn't return, i don't know hay
+            return Redirect::route('home')->with('error', 'Something went wrong!');
+        }
     }
 
     /**

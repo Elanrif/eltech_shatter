@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class StorePostQuestionRequest extends FormRequest
 {
@@ -22,9 +25,15 @@ class StorePostQuestionRequest extends FormRequest
     public function rules(): array
     {
        return [
-            'theme' => 'required',
-            'title' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
+            'theme' => 'required|max:255',
+            'title' => 'required|string',
+            'content' => 'required|string',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        Log::error('Validation failed', ['errors' => $validator->errors()->all()]);
+        throw new ValidationException($validator);
     }
 }
