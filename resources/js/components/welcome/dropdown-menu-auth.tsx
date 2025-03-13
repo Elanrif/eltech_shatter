@@ -9,9 +9,9 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Post } from '@/types/models/user';
 import { ClipboardList, Pencil, Trash } from 'lucide-react';
-
-export function DropdownMenuAuth() {
+export function DropdownMenuAuth({ post }: { post: Post }) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -21,7 +21,7 @@ export function DropdownMenuAuth() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>Gérer publication</DropdownMenuLabel>
+                <DropdownMenuLabel>Publié le : {post.created_at}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem>

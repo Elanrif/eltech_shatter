@@ -6,9 +6,11 @@ import { DropdownMenuAuth } from './dropdown-menu-auth';
 import { usePage } from '@inertiajs/react';
 import { SharedData } from '@/types';
 import { Button } from '../ui/button';
+import { DialogDeletePost } from './dialog-delete-post';
 
 export default function CardPostUser({ post }: { post: Post }) {
     const { auth } = usePage<SharedData>().props;
+    const owner = auth.user?.email === post.user?.email;
     return (
         <div>
             <Card className="max-w-[45rem]">
@@ -22,8 +24,15 @@ export default function CardPostUser({ post }: { post: Post }) {
                         <CardDescription>{post.updated_at}</CardDescription>
                     </CardHeader>
                     <CardHeader className="flex flex-row items-center gap-5">
-                        <Button size={"sm"} className='bg-blue-700 hover:bg-blue-600 hover:cursor-pointer'>Nous rejoindre</Button>
-                        {auth.user?.email === post.user?.email && <DropdownMenuAuth />}
+                        <Button size={'sm'} className="bg-blue-700 hover:cursor-pointer hover:bg-blue-600">
+                            Nous rejoindre
+                        </Button>
+                        {owner && (
+                            <div className='flex items-center gap-4'>
+                                <DropdownMenuAuth post={post} />
+                                <DialogDeletePost post={post}/>
+                            </div>
+                        )}
                     </CardHeader>
                 </div>
                 <CardHeader>

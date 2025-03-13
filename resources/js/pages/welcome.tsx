@@ -23,7 +23,6 @@ export default function Welcome() {
     const {props} = usePage<WelcomeProps>();
     const { success,posts } = props;
 
-    console.log('posts: ', posts);
     useEffect(() => {
         if(success) {
             toast.success(`${success}`, {

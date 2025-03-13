@@ -118,3 +118,21 @@ By stores its files in storage/app/public.
     # Storage link
     php artisan storage:link
 ```
+
+# Inertia router, Manual visits
+It's also possible [to manually make Inertia visits](https://inertiajs.com/manual-visits#method) / requests programmatically via JavaScript. 
+This is accomplished via the router.visit() method.
+However, it's generally more convenient to use one of Inertia's shortcut request methods. 
+These methods share all the same options as router.visit().
+```bash
+
+    import { router } from '@inertiajs/react'
+
+    router.get(url, data, options)
+    router.post(url, data, options)
+    router.put(url, data, options)
+    router.patch(url, data, options)
+    router.delete(url, options)
+    router.reload(options) // Uses the current URL
+
+```
