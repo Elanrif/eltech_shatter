@@ -10,7 +10,13 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Post } from '@/types/models/user';
+import dayjs from 'dayjs';
+import LocalizedFormat from 'dayjs/plugin/LocalizedFormat';
 import { ClipboardList, Pencil, Trash } from 'lucide-react';
+import 'dayjs/locale/fr'; // Import de la localisation française
+
+dayjs.extend(LocalizedFormat);
+dayjs.locale('fr'); // Définir la langue en français
 export function DropdownMenuAuth({ post }: { post: Post }) {
     return (
         <DropdownMenu>
@@ -21,7 +27,7 @@ export function DropdownMenuAuth({ post }: { post: Post }) {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>Publié le : {post.created_at}</DropdownMenuLabel>
+                <DropdownMenuLabel>Publié le : {dayjs(post.created_at).format('LLL')}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
                     <DropdownMenuItem>

@@ -136,3 +136,30 @@ These methods share all the same options as router.visit().
     router.reload(options) // Uses the current URL
 
 ```
+
+# Dayjs 
+
+[Day.js](https://day.js.org/en/) is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers with a largely Moment.js-compatible API.
+
+[Format](https://day.js.org/docs/en/display/format), Get the formatted date according to the string of tokens passed in.
+
+[Time fron now](https://day.js.org/docs/en/display/from-now), returns the string of relative time from now.
+
+```bash
+    # Get the formatted date according to the string of tokens passed in.
+    # To escape characters, wrap them in square brackets (e.g. [MM]).
+
+    dayjs().format() 
+    # current date in ISO8601, without fraction seconds e.g. '2020-04-02T08:02:17-05:00'
+
+    dayjs('2019-01-25').format('[YYYYescape] YYYY-MM-DDTHH:mm:ssZ[Z]') 
+    # 'YYYYescape 2019-01-25T00:00:00-02:00Z'
+
+    dayjs('2019-01-25').format('DD/MM/YYYY') # '25/01/2019'
+
+    # This requires the RelativeTime plugin to work
+    dayjs.extend(relativeTime)
+
+    dayjs('1999-01-01').fromNow() // 22 years ago
+
+```

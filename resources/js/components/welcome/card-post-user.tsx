@@ -1,13 +1,18 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { SharedData } from '@/types';
 import { Post } from '@/types/models/user';
+import { usePage } from '@inertiajs/react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr'; // Import de la localisation française
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { Bookmark, Heart, MessageCircle, ShareIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { DropdownMenuAuth } from './dropdown-menu-auth';
-import { usePage } from '@inertiajs/react';
-import { SharedData } from '@/types';
 import { Button } from '../ui/button';
 import { DialogDeletePost } from './dialog-delete-post';
+import { DropdownMenuAuth } from './dropdown-menu-auth';
 
+dayjs.extend(relativeTime);
+dayjs.locale('fr'); // Définir la langue en français
 export default function CardPostUser({ post }: { post: Post }) {
     const { auth } = usePage<SharedData>().props;
     const owner = auth.user?.email === post.user?.email;
@@ -21,16 +26,16 @@ export default function CardPostUser({ post }: { post: Post }) {
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                         <CardTitle>{post.user?.email}</CardTitle>
-                        <CardDescription>{post.updated_at}</CardDescription>
+                        <CardDescription>{dayjs(post.created_at).fromNow()}</CardDescription>
                     </CardHeader>
                     <CardHeader className="flex flex-row items-center gap-5">
                         <Button size={'sm'} className="bg-blue-700 hover:cursor-pointer hover:bg-blue-600">
                             Nous rejoindre
                         </Button>
                         {owner && (
-                            <div className='flex items-center gap-4'>
+                            <div className="flex items-center gap-4">
                                 <DropdownMenuAuth post={post} />
-                                <DialogDeletePost post={post}/>
+                                <DialogDeletePost post={post} />
                             </div>
                         )}
                     </CardHeader>
