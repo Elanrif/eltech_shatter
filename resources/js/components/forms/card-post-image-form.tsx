@@ -16,7 +16,6 @@ type FormData = {
 const themes: string[] = ['foot', 'manga', 'même', 'poeme', 'art'];
 
 export function CardPostImageForm() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, setData, post, processing, errors, setError, reset } = useForm<FormData>({
         theme: '',
         title: '',
