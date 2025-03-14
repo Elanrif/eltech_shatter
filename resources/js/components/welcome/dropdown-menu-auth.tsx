@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Post } from '@/types/models/user';
 import dayjs from 'dayjs';
-import LocalizedFormat from 'dayjs/plugin/LocalizedFormat';
+import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { ClipboardList, Pencil, Trash } from 'lucide-react';
 import 'dayjs/locale/fr'; // Import de la localisation française
 
