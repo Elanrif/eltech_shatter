@@ -66,19 +66,7 @@ export function CardPostImageForm() {
             return;
         }
 
-        // Créer un objet FormData pour envoyer l'image
-        const formData = new FormData();
-        formData.append('theme', data.theme);
-        formData.append('title', data.title);
-        if (data.image) {
-            formData.append('image', data.image);
-        }
-        const formDataObject: Record<string, string | File> = {};
-        for (const [key, value] of formData.entries()) {
-            formDataObject[key] = value;
-        }
-        console.log('formData: ', formDataObject);
-        
+        // Post from useForm already content the data { data, setData, post, ... } = useForm
         post(route('posts.store'), {
             onFinish: () => reset(),
         });

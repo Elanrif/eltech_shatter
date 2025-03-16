@@ -51,6 +51,7 @@ export function CardPostQuestionForm() {
             });
             return;
         } */
+        // Post from useForm already content the data { data, setData, post, ... } = useForm
         post(route('posts.store_question'), {
             onFinish: () => reset(),
         });

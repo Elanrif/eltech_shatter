@@ -107,10 +107,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        Log::info('Post updated', ['post' => $post]);
         $post->title = $request->title;
         $post->content = $request->content;
         $post->save();
-
+        Log::info('Post updated', ['post' => $post]);
         return Redirect::route('posts.index')->with('success', 'Post updated successfully.');
     }
 

@@ -3,11 +3,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Post } from '@/types/models/user';
 import { Link, useForm } from '@inertiajs/react';
 import { MessageCircleQuestionIcon } from 'lucide-react';
+import { Dispatch, SetStateAction } from 'react';
 import { Textarea } from '../ui/input-textarea';
-import { Post } from '@/types/models/user';
-import { Dispatch, SetStateAction, useEffect } from 'react';
 
 type FormData = {
     theme: string;
@@ -17,18 +17,10 @@ type FormData = {
 const themes: string[] = ['foot', 'manga', 'même', 'poeme', 'art'];
 export function CardPostQuestionEditForm({ post__, handleOpen }: { post__: Post; handleOpen: Dispatch<SetStateAction<boolean>> }) {
     const { data, setData, post, processing, errors, setError, reset } = useForm<FormData>({
-        theme: '',
-        title: '',
-        content: '',
+        theme: post__.theme as string,
+        title: post__.title as string,
+        content: post__.content as string,
     });
-
-    useEffect(() => {
-        if (post__) {
-            setData('theme', post__.theme as string);
-            setData('title', post__.title as string);
-            setData('content', post__.content as string);
-        }
-    }, [setData, post__]);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const target = e.target;
@@ -55,16 +47,15 @@ export function CardPostQuestionEditForm({ post__, handleOpen }: { post__: Post;
         if (!data.theme) errors.theme = 'Sélectionner un thème';
         if (!data.title) errors.title = 'Veuillez saisir une question';
 
-        /* if (Object.keys(errors).length > 0) {
-            (Object.entries(errors) as [keyof typeof data, string][]).forEach(([key, message]) => {
-                setError(key, message);
-            });
-            return;
-        } */
         post(route('posts.store_question'), {
             onFinish: () => reset(),
         });
     }
+
+    if (!post__) {
+        return <div>Chargement en cours...</div>;
+    }
+
     return (
         <form onSubmit={submit}>
             <Card className="md:w-[750px]">
@@ -86,9 +77,9 @@ export function CardPostQuestionEditForm({ post__, handleOpen }: { post__: Post;
                             <Label htmlFor="theme" className="after:ml-1 after:text-red-500 after:content-['*']">
                                 Thème
                             </Label>
-                            <Select onValueChange={handleSelectChange} value={data.theme} required>
-                                <SelectTrigger className="w-[280px]" id="interest">
-                                    <SelectValue id="theme" placeholder="Sélectionner un Interest" />
+                            <Select onValueChange={handleSelectChange} value={data.theme as string} required>
+                                <SelectTrigger className="w-[280px]" id="theme">
+                                    <SelectValue id="theme" placeholder={'Sélectionner un thème'} />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>

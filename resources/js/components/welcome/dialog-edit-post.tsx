@@ -16,7 +16,7 @@ export function DialogEditPost({ post }: { post: Post }) {
                     <Edit className="text-blue-500" />
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-4xl">
+            <DialogContent className="max-w-sm sm:max-w-4xl">
                 {post.image ? (
                     <CardPostImageEditForm post__={post} handleOpen={setOpen} />
                 ) : (

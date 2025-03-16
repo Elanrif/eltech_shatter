@@ -6,9 +6,10 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Post } from '@/types/models/user';
 import { useForm } from '@inertiajs/react';
 import { ImageIcon, ImagePlusIcon } from 'lucide-react';
-import React, { ChangeEvent, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 type FormData = {
+    id: number;
     theme: string;
     title: string;
     image: File | null; // Ajoutez un champ pour l'image
@@ -18,18 +19,12 @@ const themes: string[] = ['foot', 'manga', 'même', 'poeme', 'art'];
 
 export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; handleOpen: Dispatch<SetStateAction<boolean>> }) {
     //const { posts } = usePage<{ posts: Post[] }>().props; when we want to take form session
-    const { data, setData, post, processing, errors, setError, reset } = useForm<FormData>({
-        theme: '',
-        title: '',
-        image: null, // Initialisez l'image à null
+    const { data, setData, put, processing, errors, setError } = useForm<FormData>({
+        id: post__.id as number,
+        theme: post__.theme as string,
+        title: post__.title as string,
+        image: null,
     });
-
-    useEffect(() => {
-        if (post__) {
-            setData('theme', post__.theme as string);
-            setData('title', post__.title as string);
-        }
-    }, [setData, post__]);
 
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const target = e.target;
@@ -73,22 +68,14 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
             return;
         }
 
-        // Créer un objet FormData pour envoyer l'image
-        const formData = new FormData();
-        formData.append('theme', data.theme);
-        formData.append('title', data.title);
-        if (data.image) {
-            formData.append('image', data.image);
-        }
-        const formDataObject: Record<string, string | File> = {};
-        for (const [key, value] of formData.entries()) {
-            formDataObject[key] = value;
-        }
-        console.log('formData: ', formDataObject);
-
-        post(route('posts.store'), {
-            onFinish: () => reset(),
+        // Post from useForm already content the data { data, setData, post, ... } = useForm
+        put(route('posts.update', post__.id), {
+            onFinish: () => handleOpen(false),
         });
+    }
+
+    if (!post__) {
+        return <div>Chargement en cours...</div>;
     }
 
     return (
@@ -109,9 +96,9 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
                             <Label htmlFor="theme" className="after:ml-1 after:text-red-500 after:content-['*']">
                                 Thème
                             </Label>
-                            <Select onValueChange={handleSelectChange} value={data.theme} required>
-                                <SelectTrigger className="w-[280px]" id="interest">
-                                    <SelectValue id="theme" placeholder="Sélectionner un Interest" />
+                            <Select name="theme" onValueChange={handleSelectChange} value={data.theme as string} required>
+                                <SelectTrigger className="w-[280px]" id="theme">
+                                    <SelectValue id="theme" placeholder={'Sélectionner un thème'} />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
@@ -132,11 +119,15 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
                             <Input id="title" type="text" name="title" value={data.title} onChange={handleChange} placeholder="Saisir une question" />
                             {errors.title && <p className="mt-2 text-sm text-red-500">{errors.title}</p>}
                         </div>
-                        <div className="flex flex-col space-y-1.5">
-                            <Card className="flex items-center justify-center bg-black text-white">
+                        <div className="relative flex flex-col space-y-1.5">
+                            {/* L'image en arrière-plan */}
+                            <img src={post__?.image} alt={post__?.image} className="absolute inset-0 z-0 h-full w-full object-cover" />
+
+                            {/* Le Card par-dessus l'image */}
+                            <Card className="relative z-10 flex items-center justify-center bg-black/70 text-white">
                                 <CardHeader>
                                     <CardTitle>Choisir une photo</CardTitle>
-                                    <CardDescription>Veuillez selectionner une image JPEG,PNG,JPG</CardDescription>
+                                    <CardDescription>Veuillez sélectionner une image JPEG, PNG, JPG</CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <Label htmlFor="image">
@@ -147,6 +138,8 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
                                     <Input id="image" type="file" accept="image/*" onChange={handleImageChange} required />
                                 </CardFooter>
                             </Card>
+
+                            {/* Affichage des erreurs */}
                             {errors.image && <p className="mt-2 text-sm text-red-500">{errors.image}</p>}
                         </div>
                     </div>
