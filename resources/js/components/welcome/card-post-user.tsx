@@ -9,7 +9,7 @@ import { Bookmark, Heart, MessageCircle, ShareIcon } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
 import { DialogDeletePost } from './dialog-delete-post';
-import { DropdownMenuAuth } from './dropdown-menu-auth';
+import { DialogEditPost } from './dialog-edit-post';
 
 dayjs.extend(relativeTime);
 dayjs.locale('fr'); // Définir la langue en français
@@ -34,7 +34,7 @@ export default function CardPostUser({ post }: { post: Post }) {
                         </Button>
                         {owner && (
                             <div className="flex items-center gap-4">
-                                <DropdownMenuAuth post={post} />
+                                <DialogEditPost post={post} />
                                 <DialogDeletePost post={post} />
                             </div>
                         )}

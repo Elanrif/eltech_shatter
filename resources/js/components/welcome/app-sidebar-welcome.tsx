@@ -1,29 +1,23 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/react';
-import { BookOpen, BookOpenIcon, Bot, Clapperboard, Fence, HelpCircle, HouseIcon, MessageCircleQuestionIcon } from 'lucide-react';
+import { BookOpenIcon, Fence, HelpCircle, HouseIcon } from 'lucide-react';
 import AppLogo from '../app-logo';
-import { ButtonPost } from './button-post';
 import { NavMain } from '../nav-main';
 import { NavUser } from '../nav-user';
+import { ButtonPost } from './button-post';
 
 const data = {
     navHome: [
         {
-            title: 'Accueil',
+            title: 'Publications',
             url: 'home',
             icon: HouseIcon,
-            isActive: true,
-        },
-        {
-            title: 'Populaires',
-            url: 'home',
-            icon: BookOpen,
             isActive: true,
         },
     ],
     navMain: [
         {
-            title: 'Culture et Internet',
+            title: 'Thèmes',
             url: 'home',
             icon: Fence,
             items: [
@@ -41,47 +35,8 @@ const data = {
                 },
             ],
         },
-        {
-            title: 'Question et réponses',
-            url: 'home',
-            icon: MessageCircleQuestionIcon,
-            items: [
-                {
-                    title: 'Questions et réponses',
-                    url: 'home',
-                },
-                {
-                    title: 'Histoires et confessions',
-                    url: 'home',
-                },
-            ],
-        },
-        {
-            title: 'Films et séries',
-            url: 'home',
-            icon: Clapperboard,
-        },
     ],
     navResource: [
-        {
-            title: 'eltech shatter',
-            url: 'home',
-            icon: Bot,
-            items: [
-                {
-                    title: 'Genesis',
-                    url: 'home',
-                },
-                {
-                    title: 'Explorer',
-                    url: 'home',
-                },
-                {
-                    title: 'Quantum',
-                    url: 'home',
-                },
-            ],
-        },
         {
             title: 'Aide',
             url: 'home',
@@ -110,7 +65,7 @@ export function AppSidebarWelcome() {
                 </SidebarMenu>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className="bg-blue-50">
                 <NavMain items={data.navHome} title="accueil" />
                 <NavMain items={data.navMain} title="thématique" />
                 <NavMain items={data.navResource} title="resource" />
