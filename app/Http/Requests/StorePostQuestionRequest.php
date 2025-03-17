@@ -24,6 +24,7 @@ class StorePostQuestionRequest extends FormRequest
      */
     public function rules(): array
     {
+        Log::info('Create Post Question Request RULES : ', ['post' => $this->all()]);
        return [
             'theme' => 'required|max:255',
             'title' => 'required|string',
@@ -31,9 +32,4 @@ class StorePostQuestionRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        Log::error('Validation failed', ['errors' => $validator->errors()->all()]);
-        throw new ValidationException($validator);
-    }
 }

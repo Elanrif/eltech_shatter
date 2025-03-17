@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -21,10 +22,11 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules(): array
     {
+        Log::info('Update Post Request RULES : ', ['post' => $this->all()]);
         return [
             'theme' => 'required',
             'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

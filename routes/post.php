@@ -7,7 +7,7 @@ Route::get('posts', [PostController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('posts.index');
     
-Route::apiResource('posts', PostController::class)->except(['index']);
+Route::resource('posts', PostController::class)->except(['index']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('posts.question', [PostController::class, 'index_question'])->name('posts.index_question');

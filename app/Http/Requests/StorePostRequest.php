@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StorePostRequest extends FormRequest
 {
@@ -21,6 +22,7 @@ class StorePostRequest extends FormRequest
      */
     public function rules(): array
     {
+        Log::info('Create Post Request RULES : ', ['post' => $this->all()]);
        return [
             'theme' => 'required',
             'title' => 'required|string|max:255',

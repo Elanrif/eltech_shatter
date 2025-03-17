@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostQuestionRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
@@ -43,7 +44,8 @@ class PostController extends Controller
 
         if ($request->hasFile('image')){
             $image = $request->file('image');
-            $imageName = Str::random(20) . '.' . $image->getClientOriginalExtension();
+            $timestamp = Carbon::now()->format('Ymd_His'); // Format : AnnéeMoisJour_HeureMinuteSeconde
+            $imageName = $timestamp . '_' . Str::random(5) . '.' . $image->getClientOriginalExtension();
             $imagePath = $image->storeAs('images', $imageName, 'public');
             $imageUrl = Storage::url($imagePath);
         }
@@ -61,8 +63,7 @@ class PostController extends Controller
 
         public function store_question(StorePostQuestionRequest $request)
     {
-        try {
-            // Get validated data
+        // Get validated data
         $validatedData = $request->validated();
 
         $post = new Post();
@@ -76,14 +77,6 @@ class PostController extends Controller
         Log::info('Post created successfully', ['post' => $post]);
         
         return Redirect::route('home')->with('success', 'Post created successfully');
-
-        } catch (\Exception $e) {
-            // Log error
-            Log::error('Failed to crate post', ['error' => $e->getMessage()()]);
-
-            // It doesn't return, i don't know hay
-            return Redirect::route('home')->with('error', 'Something went wrong!');
-        }
     }
 
     /**
@@ -99,20 +92,35 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-       return Inertia::render('Posts/Edit', ['post' => $post]);
+       return Inertia::render('posts/edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
-    {
-        Log::info('Post updated', ['post' => $post]);
-        $post->title = $request->title;
-        $post->content = $request->content;
+    public function update(UpdatePostRequest $request, Post $post) {
+        $validatedData = $request->validated();
+        $post->theme = $validatedData['theme'];
+        $post->title = $validatedData['title'];
+
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+            //str_replace cauz, to delete image from storage Storage::disk want the relative path    
+            $oldImagePath = str_replace('/storage', '', $post->image);
+            Storage::disk('public')->delete($oldImagePath);
+            }
+
+            $image = $request->file('image');
+            $timestamp = Carbon::now()->format('Ymd_His'); // Format : AnnéeMoisJour_HeureMinuteSeconde
+            $imageName = $timestamp . '_' . Str::random(5) . '.' . $image->getClientOriginalExtension();
+            $imagePath = $image->storeAs('images', $imageName, 'public');
+            $imageUrl = Storage::url($imagePath);
+
+            $post->image = $imageUrl;
+        }
+
         $post->save();
-        Log::info('Post updated', ['post' => $post]);
-        return Redirect::route('posts.index')->with('success', 'Post updated successfully.');
+        return Redirect::route('home')->with('success', 'Post updated successfully.');
     }
 
     /**

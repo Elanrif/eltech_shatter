@@ -13,17 +13,19 @@ type FormData = {
     theme: string;
     title: string;
     image: File | null; // Ajoutez un champ pour l'image
+    _method: string;
 };
 
 const themes: string[] = ['foot', 'manga', 'même', 'poeme', 'art'];
 
 export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; handleOpen: Dispatch<SetStateAction<boolean>> }) {
     //const { posts } = usePage<{ posts: Post[] }>().props; when we want to take form session
-    const { data, setData, put, processing, errors, setError } = useForm<FormData>({
+    const { data, setData, post, processing, errors, setError } = useForm<FormData>({
         id: post__.id as number,
         theme: post__.theme as string,
         title: post__.title as string,
         image: null,
+        _method: 'PUT', // put form useForm doesn't work, so this is the only solution
     });
 
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -56,7 +58,6 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
 
     function submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
         const errors: Partial<Record<keyof typeof data, string>> = {};
         if (!data.theme) errors.theme = 'Sélectionner un thème';
         if (!data.title) errors.title = 'Veuillez saisir un titre';
@@ -69,17 +70,18 @@ export function CardPostImageEditForm({ post__, handleOpen }: { post__: Post; ha
         }
 
         // Post from useForm already content the data { data, setData, post, ... } = useForm
-        put(route('posts.update', post__.id), {
-            onFinish: () => handleOpen(false),
-        });
-    }
+       post(`/posts/${data.id}`);
 
+       // close dialog
+       handleOpen(false)
+    }
     if (!post__) {
         return <div>Chargement en cours...</div>;
     }
 
     return (
         <form onSubmit={submit}>
+            @csrf @method('PUT')
             <Card className="md:w-[750px]">
                 <div className="flex items-center justify-between">
                     <CardHeader>
