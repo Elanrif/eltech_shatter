@@ -36,6 +36,16 @@ The **Laravel React Starter Kit** provides a robust, modern starting point for b
 - [Tailwindcss](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
+# Creating an Application Using a Starter Kit
+To create a new Laravel application using one of our starter kits, you should first install PHP and the Laravel CLI tool. If you already have PHP and Composer installed, you may install the Laravel installer CLI tool via Composer:
+ ```bash
+    composer global require laravel/installer
+```
+Then, create a new Laravel application using the Laravel installer CLI. The Laravel installer will prompt you to select your preferred starter kit:
+```bash
+    laravel new my-app
+```
+
 # Create Migrations, Controllers, ... Request
 Laravel includes [Eloquent, an object-relational mapper (ORM)](https://laravel.com/docs/12.x/eloquent) that makes it enjoyable to interact with your database. When using Eloquent, each database table has a corresponding "Model" that is used to interact with that table.
 
